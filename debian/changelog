@@ -1,5 +1,1068 @@
-template-repository (1.0-1) unstable; urgency=medium
+kf6-kimageformats (6.10.0-2) unstable; urgency=medium
 
-  * Initial release
+  [ Aurélien COUDERC ]
+  * Backport upstream fix for tests failing on several architectures.
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 18 Jan 2025 20:05:50 +0100
+
+kf6-kimageformats (6.10.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (6.9.0).
+  * Update build-deps and deps with the info from cmake.
+  * New upstream release (6.10.0).
+  * Update build-deps and deps with the info from cmake.
+  * Revert upstream commit "HEIF plug-in extended to read AVCI format",
+    it currently breaks with HEIF we have in Debian.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Fri, 10 Jan 2025 23:24:28 +0100
+
+kf6-kimageformats (6.8.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (6.8.0).
+  * Update build-deps and deps with the info from cmake.
+  * Release to unstable.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 04 Dec 2024 12:09:47 +0100
+
+kf6-kimageformats (6.7.0-1) experimental; urgency=medium
+
+  * Team upload.
+  * New upstream release.
+
+ -- Simon Quigley <tsimonq2@debian.org>  Sun, 03 Nov 2024 19:29:25 -0600
+
+kf6-kimageformats (6.6.0-2) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * Fix endianness bug in PCX reader on big endian architectures.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 22 Sep 2024 01:23:42 +0200
+
+kf6-kimageformats (6.6.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (6.6.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Fri, 06 Sep 2024 23:09:52 +0200
+
+kf6-kimageformats (6.5.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * CI: update/simplify configuration.
+  * Remove unused build dependencies: librav1e-dev, libsvtav1enc-dev,
+    libxkbcommon-dev, and libyuv-dev.
+  * Add libheif-plugin-j2kdec as build dependency and runtime dependency,
+    as it is needed to provide codecs needed by the HEIF plugin.
+  * Enable the test suite again, as it should work fine now.
+  * Temporarily ignore the test suite failures on 32bit architectures;
+    not ideal, but at least we can get results.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 23 Aug 2024 09:01:17 +0200
+
+kf6-kimageformats (6.5.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (6.5.0).
+  * Update build-deps and deps with the info from cmake.
+  * Release to unstable.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 10 Aug 2024 23:22:05 +0200
+
+kf6-kimageformats (6.4.0-1) experimental; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (6.4.0).
+  * Update build-deps and deps with the info from cmake.
+  * Add missing build-dependencies not correctly pulled by libavif-dev.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Fri, 19 Jul 2024 09:24:31 +0200
+
+kf6-kimageformats (6.3.0-1) experimental; urgency=medium
+
+  [ Patrick Franz ]
+  * New upstream release (6.3.0).
+  * Bump Standards-Version to 4.7.0 (No changes needed).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Patrick Franz <deltaone@debian.org>  Sun, 09 Jun 2024 14:55:05 +0200
+
+kf6-kimageformats (6.0.0-2) experimental; urgency=medium
+
+  [ Patrick Franz ]
+  * Rename kf6-kimageformat-plugins to kimageformat6-plugins.
+
+ -- Patrick Franz <deltaone@debian.org>  Tue, 28 May 2024 21:13:57 +0200
+
+kf6-kimageformats (6.0.0-1) experimental; urgency=medium
+
+  [ Patrick Franz ]
+  * New upstream release (6.0.0).
+  * Update upstream signing-key.
+  * Update build-deps and deps with the info from cmake.
+  * Create new packages.
+  * Update d/copyright.
+
+ -- Patrick Franz <deltaone@debian.org>  Sun, 07 Apr 2024 03:26:36 +0200
+
+kimageformats (5.115.0-1) experimental; urgency=medium
+
+  [ Patrick Franz ]
+  * New upstream release 5.115.0 (Closes: #1053665).
+  * Update build-deps and deps with the info from cmake.
+  * Add myself to Uploaders.
+  * Build-depend on pkgconf instead of pkg-config as the latter has been
+    superseded by the former.
+  * Disable tests.
+
+ -- Patrick Franz <deltaone@debian.org>  Mon, 18 Mar 2024 23:59:32 +0100
+
+kimageformats (5.107.0-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+
+  [ Adrian Bunk ]
+  * debian/rules: Specify -fexcess-precision=fast for i386 to avoid FTBFS
+    due to GCC 13 changing its default behavior. (Closes: #1053830)
+
+ -- Boyuan Yang <byang@debian.org>  Sun, 15 Oct 2023 16:16:43 -0400
+
+kimageformats (5.107.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Add the qt5-image-formats-plugins test build dependency, needed for some
+    of the psd tests
+    - drop patch disable-failing-test.patch, no more needed now
+  * Fix the tests of the HEIF/HEIC plugin with the new Debian packaging of
+    libheif 1.16.2, which provides the various plugins as separate packages:
+    (Closes: #1040255)
+    - add libheif-plugin-libde265, and libheif-plugin-x265 both as test build
+      dependencies, and runtime dependencies, as the plugin needs at least
+      these two to load and do basic reading/writing
+    - enable again the plugin
+
+ -- Pino Toscano <pino@debian.org>  Wed, 05 Jul 2023 20:08:33 +0200
+
+kimageformats (5.107.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Temporarily disable the HEIF/HEIC plugin, as it does not work properly with
+    newer versions of libheif (see #1040255).
+
+ -- Pino Toscano <pino@debian.org>  Wed, 05 Jul 2023 18:59:08 +0200
+
+kimageformats (5.107.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.105.0).
+  * Update build-deps and deps with the info from cmake.
+  * New upstream release (5.107.0).
+  * Update build-deps and deps with the info from cmake.
+  * Add patch to disable failing test.
+  * Release to unstable.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 18 Jun 2023 16:08:35 +0200
+
+kimageformats (5.104.0-1) experimental; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.104.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 15 Mar 2023 16:09:55 +0100
+
+kimageformats (5.103.0-2) unstable; urgency=medium
+
+  * Build with -ffloat-store on i386. (Closes: #1031900)
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 25 Feb 2023 08:09:43 +0100
+
+kimageformats (5.103.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.103.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 12 Feb 2023 21:44:26 +0100
+
+kimageformats (5.102.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Extend the libjxl-dev build dependency to all the Linux architectures,
+    as it builds on all of them now.
+
+ -- Pino Toscano <pino@debian.org>  Sat, 28 Jan 2023 10:48:54 +0100
+
+kimageformats (5.102.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.102.0).
+  * Update build-deps and deps with the info from cmake.
+  * Bump Standards-Version to 4.6.2, no change required.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 22 Jan 2023 21:35:05 +0100
+
+kimageformats (5.101.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Limit the libjxl-dev build dependency only on amd64, and i386, as it is not
+    available on all the architectures yet.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 16 Dec 2022 22:34:51 +0100
+
+kimageformats (5.101.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.101.0).
+  * Update build-deps and deps with the info from cmake.
+  * Add libjxl-dev and libraw-dev as build dependencies for JPEG XL and
+    RAW file formats support. (Closes: #1026033)
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Tue, 13 Dec 2022 07:40:27 +0100
+
+kimageformats (5.100.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.99.0).
+  * Update build-deps and deps with the info from cmake.
+  * New upstream release (5.100.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sat, 19 Nov 2022 23:19:00 +0100
+
+kimageformats (5.98.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.98.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 18 Sep 2022 23:11:42 +0200
+
+kimageformats (5.97.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.97.0).
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 14 Aug 2022 18:55:33 +0200
+
+kimageformats (5.96.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.96.0).
+  * Drop patch upstream_psd-Fix-segfault-on-architectures-where-char-is-
+    unsi.patch applied upstream.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Sun, 31 Jul 2022 13:33:02 +0200
+
+kimageformats (5.94.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Enable the HEIF/HEIC plugin:
+    - add the libheif-dev build dependency
+    - pass -DKIMAGEFORMATS_HEIF=ON to cmake
+  * Backport upstream commit 2a84dd677db53729be5862503ac56c5139086bb3 to fix
+    a crash in the psd plugin on architectures with unsigned char; patch
+    upstream_psd-Fix-segfault-on-architectures-where-char-is-unsi.patch
+    - stop passing -fsigned-char to CFLAGS & CXXFLAGS, as it should not be
+      needed anymore now
+
+ -- Pino Toscano <pino@debian.org>  Wed, 01 Jun 2022 07:53:34 +0200
+
+kimageformats (5.94.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Bump Standards-Version to 4.6.1, no changes required.
+  * CI: enable again the blhc job.
+  * Remove inactive Uploaders.
+  * Modernize building:
+    - add the dh-sequence-kf5 build dependency to use the kf5 addon
+      automatically, removing pkg-kde-tools
+    - drop all the manually specified addons and buildsystem for dh
+  * Mark the xauth, and xvfb build dependencies as <!nocheck>, as they are
+    needed only when running the test suite.
+  * Pass -fsigned-char to CFLAGS & CXXFLAGS: apparently the psd plugin is
+    broken on architectures where char is unsigned.
+  * Make the test suite fatal also on big endian architectures: with the
+    recent upstream changes to it, and the above -fsigned-char workaround,
+    it seems the psd plugin works also on big endian architectures now.
+
+ -- Pino Toscano <pino@debian.org>  Fri, 27 May 2022 09:47:46 +0200
+
+kimageformats (5.94.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.94.0).
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Thu, 19 May 2022 23:59:04 +0200
+
+kimageformats (5.93.0-1) unstable; urgency=medium
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.93.0).
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Wed, 11 May 2022 23:22:45 +0200
+
+kimageformats (5.90.0-1) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.89.0).
+
+  [ Aurélien COUDERC ]
+  * New upstream release (5.90.0).
+  * Added myself to the uploaders.
+
+ -- Aurélien COUDERC <coucouf@debian.org>  Fri, 11 Feb 2022 23:46:43 +0100
+
+kimageformats (5.88.0-1) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.87.0).
+  * New upstream release (5.88.0).
+  * Force-bump frameworks internal b-d to 5.88.
+
+ -- Norbert Preining <norbert@preining.info>  Wed, 17 Nov 2021 06:07:40 +0900
+
+kimageformats (5.86.0-1) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.86.0).
+  * Bump Standards-Version to 4.6.0, no change required.
+
+ -- Norbert Preining <norbert@preining.info>  Mon, 13 Sep 2021 10:56:13 +0900
+
+kimageformats (5.85.0-2) unstable; urgency=medium
+
+  * Release to unstable.
+
+ -- Norbert Preining <norbert@preining.info>  Sat, 28 Aug 2021 23:42:47 +0900
+
+kimageformats (5.85.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.85.0).
+
+ -- Norbert Preining <norbert@preining.info>  Mon, 16 Aug 2021 00:03:41 +0900
+
+kimageformats (5.83.0-2) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Norbert Preining <norbert@preining.info>  Mon, 16 Aug 2021 11:53:05 +0900
+
+kimageformats (5.83.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.83.0).
+
+ -- Norbert Preining <norbert@preining.info>  Sun, 13 Jun 2021 11:03:42 +0900
+
+kimageformats (5.82.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.82.0).
+  * Removed Maximiliano Curia from the uploaders, thanks for your work
+    on the package!
+
+ -- Norbert Preining <norbert@preining.info>  Sat, 08 May 2021 21:13:26 +0900
+
+kimageformats (5.81.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream version (5.81.0)
+  * Bump inter-frameworks dependencies.
+
+ -- Norbert Preining <norbert@preining.info>  Mon, 12 Apr 2021 10:18:18 +0900
+
+kimageformats (5.80.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream version (5.80.0)
+  * Bump inter-frameworks dependencies.
+
+ -- Norbert Preining <norbert@preining.info>  Mon, 15 Mar 2021 15:10:34 +0900
+
+kimageformats (5.79.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.79.0).
+
+ -- Norbert Preining <norbert@preining.info>  Tue, 16 Feb 2021 06:45:28 +0900
+
+kimageformats (5.78.0-5) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * Cherry-pick upstream fix for CVE-2021-36083 (Closes: #990527)
+
+ -- Norbert Preining <norbert@preining.info>  Fri, 02 Jul 2021 05:21:43 +0900
+
+kimageformats (5.78.0-4) unstable; urgency=medium
+
+  * Team upload.
+  * Allow the test suite to fail on big endian architectures, as the test
+    kimageformats-read-psd fails there.
+
+ -- Pino Toscano <pino@debian.org>  Mon, 18 Jan 2021 17:03:00 +0100
+
+kimageformats (5.78.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Drop the 'testsuite' autopkgtest, as it does not test the installed
+    packages.
+  * Drop the unused debian/meta/ stuff.
+  * Run the test suite at build time, since it seems to work fine:
+    - add the xauth, and xvfb build dependencies
+    - run dh_auto_test using xvfb-run
+    - disable the fixfilepath reproducibility feature, as it breaks
+      QFINDTESTDATA
+  * Rename docs to kimageformat-plugins.docs, to make it explicit which package
+    it refers to.
+
+ -- Pino Toscano <pino@debian.org>  Mon, 18 Jan 2021 13:23:58 +0100
+
+kimageformats (5.78.0-2) unstable; urgency=medium
+
+  [ Norbert Preining ]
+  * Add libavif-dev to B-D to enable AVIF support (Closes: #980074).
+  * Release to unstable.
+
+ -- Norbert Preining <norbert@preining.info>  Sun, 17 Jan 2021 12:02:22 +0900
+
+kimageformats (5.78.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * New upstream release (5.78.0).
+  * Update build-deps and deps with the info from cmake.
+
+ -- Norbert Preining <norbert@preining.info>  Wed, 13 Jan 2021 10:32:42 +0900
+
+kimageformats (5.77.0-2) unstable; urgency=medium
+
+  * Release to unstable.
+
+ -- Norbert Preining <norbert@preining.info>  Tue, 22 Dec 2020 10:33:35 +0900
+
+kimageformats (5.77.0-1) experimental; urgency=medium
+
+  [ Norbert Preining ]
+  * Bump Standards-Version to 4.5.1 (No changes needed).
+  * New upstream release (5.77.0).
+  * Update build-deps and deps with the info from cmake.
+  * Add myself to Uploaders.
+  * Update maintainer to Debian Qt/KDE Maintainers.
+
+ -- Norbert Preining <norbert@preining.info>  Fri, 18 Dec 2020 10:03:54 +0900
+
+kimageformats (5.74.0-2) unstable; urgency=medium
+
+  * Team upload to unstable.
+
+ -- Sandro Knauß <hefee@debian.org>  Mon, 19 Oct 2020 23:15:10 +0200
+
+kimageformats (5.74.0-1) experimental; urgency=medium
+
+  * Team upload.
+
+  [ Sandro Knauß ]
+  * New upstream release (5.74.0).
+  * Update build-deps and deps with the info from cmake.
+  * Update Homepage link to point to new invent.kde.org
+  * Update repository related entries to metadata file.
+  * Update field Source in debian/copyright to invent.kde.org move.
+  * Add Bug-* entries to metadata file.
+
+ -- Sandro Knauß <hefee@debian.org>  Sun, 27 Sep 2020 17:45:24 +0200
+
+kimageformats (5.70.0-1) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Sandro Knauß ]
+  * Bump compat level to 13.
+  * New upstream release (5.70.0).
+  * Update build-deps and deps with the info from cmake.
+  * Wrap long lines in changelog entries: 5.21.0-1.
+  * Set field Upstream-Contact in debian/copyright.
+  * Remove obsolete fields Contact, Name from debian/upstream/metadata
+    (already present in machine-readable debian/copyright).
+
+ -- Sandro Knauß <hefee@debian.org>  Tue, 26 May 2020 23:56:56 +0200
+
+kimageformats (5.69.0-1) experimental; urgency=medium
+
+  * Team upload.
+
+  [ Sandro Knauß ]
+  * Bump compat level to 12.
+  * Bump Standards-Version to 4.5.0 (No changes needed).
+  * Get rid of debug-symbol-migration package.
+  * Add Rules-Requires-Root field to control.
+  * New upstream release (5.69.0).
+  * Update build-deps and deps with the info from cmake.
+  * Enable hardening all.
+  * Remove COPYING.LIB listed in copyright file.
+  * Remove not needed injection of linker flags.
+
+ -- Sandro Knauß <hefee@debian.org>  Thu, 30 Apr 2020 01:01:07 +0200
+
+kimageformats (5.62.0-1) unstable; urgency=medium
+
+  * Update reprotest args variable
+  * New upstream release (5.62.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 20 Sep 2019 10:13:04 -0700
+
+kimageformats (5.61.0-1) experimental; urgency=medium
+
+  * Salsa CI automatic initialization by Tuco
+  * New upstream release (5.61.0).
+  * Update build-deps and deps with the info from cmake
+  * Ignore reprotest build path variations
+  * Release to experimental
+
+ -- Maximiliano Curia <maxy@debian.org>  Mon, 09 Sep 2019 21:10:37 +0100
+
+kimageformats (5.54.0-1) unstable; urgency=medium
+
+  * New upstream release (5.52.0).
+  * Update build-deps and deps with the info from cmake
+  * New upstream release (5.53.0).
+  * Update build-deps and deps with the info from cmake
+  * New upstream release (5.54.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 17 Jan 2019 19:26:57 -0300
+
+kimageformats (5.51.0-1) unstable; urgency=medium
+
+  * New upstream release (5.50.0).
+  * Update build-deps and deps with the info from cmake
+  * New upstream release (5.51.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Wed, 07 Nov 2018 17:16:57 +0100
+
+kimageformats (5.49.0-1) unstable; urgency=medium
+
+  * New upstream release (5.48.0).
+  * Update build-deps and deps with the info from cmake
+  * New upstream release (5.49.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 17 Aug 2018 16:18:38 +0200
+
+kimageformats (5.47.0-1) unstable; urgency=medium
+
+  * New upstream release (5.47.0).
+  * Update build-deps and deps with the info from cmake
+  * testsuite: Also disable the rgba test
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 15 Jun 2018 12:09:30 +0200
+
+kimageformats (5.46.0-1) unstable; urgency=medium
+
+  * New upstream release (5.46.0).
+  * Update build-deps and deps with the info from cmake
+  * Bump Standards-Version to 4.1.4.
+  * Use https for the debian/copyright
+  * testsuite: Run tests one at the time
+  * testsuite: Disable simple-rgb-gimp-2.8.10.xcf test
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 17 May 2018 22:15:06 +0200
+
+kimageformats (5.45.0-1) unstable; urgency=medium
+
+  * New upstream release (5.45.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to unstable
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 05 May 2018 08:10:33 +0200
+
+kimageformats (5.44.0-1) sid; urgency=medium
+
+  * New upstream release (5.44.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to sid
+
+ -- Maximiliano Curia <maxy@debian.org>  Wed, 21 Mar 2018 14:40:54 +0100
+
+kimageformats (5.43.0-1) experimental; urgency=medium
+
+  * Use the salsa canonical urls
+  * New upstream release (5.43.0).
+  * Update build-deps and deps with the info from cmake
+  * Release to experimental
+
+ -- Maximiliano Curia <maxy@debian.org>  Mon, 26 Feb 2018 11:43:42 +0100
+
+kimageformats (5.42.0-2) sid; urgency=medium
+
+  * New revision
+  * Release to sid
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 10 Feb 2018 11:28:55 +0100
+
+kimageformats (5.42.0-1) experimental; urgency=medium
+
+  * New upstream release (5.42.0).
+  * Add link options as-needed
+  * Bump debhelper build-dep and compat to 11.
+  * Build without build_stamp
+  * Update build-deps and deps with the info from cmake
+  * Bump Standards-Version to 4.1.3.
+  * Release to experimental
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 02 Feb 2018 12:05:20 +0100
+
+kimageformats (5.41.0-1) experimental; urgency=medium
+
+  * New upstream release (5.41.0).
+  * Bump Standards-Version to 4.1.2.
+  * Update build-deps and deps with the info from cmake
+  * Release to experimental
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 15 Dec 2017 10:42:43 -0300
+
+kimageformats (5.41.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 08 Dec 2017 14:45:54 +0000
+
+kimageformats (5.40.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 10 Nov 2017 12:58:25 +0000
+
+kimageformats (5.39.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sun, 15 Oct 2017 11:42:34 +0000
+
+kimageformats (5.38.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 11 Sep 2017 13:24:53 +0000
+
+kimageformats (5.37.0-2) sid; urgency=medium
+
+  * New revision
+  * Bump Standards-Version to 4.1.0.
+  * Update upstream metadata
+  * Release to sid
+
+ -- Maximiliano Curia <maxy@debian.org>  Sun, 03 Sep 2017 09:58:17 +0200
+
+kimageformats (5.37.0-1) experimental; urgency=medium
+
+  * New upstream release (5.37.0).
+  * Update build-deps and deps with the info from cmake
+  * Bump Standards-Version to 4.0.1.
+  * wrap-and-sort
+  * Release to experimental
+
+ -- Maximiliano Curia <maxy@debian.org>  Wed, 16 Aug 2017 10:42:50 +0200
+
+kimageformats (5.37.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 11 Aug 2017 15:13:33 +0000
+
+kimageformats (5.36.0-1) experimental; urgency=medium
+
+  [ Maximiliano Curia ]
+  * New upstream release (5.35.0).
+  * Bump Standards-Version to 4.0.0.
+  * Update build-deps and deps with the info from cmake
+  * watch: Use https uris
+  * New upstream release (5.36.0).
+  * Update build-deps and deps with the info from cmake
+
+  [ Raymond Wooninck ]
+  * also include signing-key
+  * Add signing key
+
+ -- Maximiliano Curia <maxy@debian.org>  Sun, 09 Jul 2017 23:41:48 +0200
+
+kimageformats (5.36.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 10 Jul 2017 17:12:35 +0000
+
+kimageformats (5.35.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sun, 11 Jun 2017 20:36:46 +0000
+
+kimageformats (5.34.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sun, 14 May 2017 17:36:31 +0000
+
+kimageformats (5.33.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 07 Apr 2017 16:23:52 +0000
+
+kimageformats (5.32.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sun, 12 Mar 2017 13:22:04 +0000
+
+kimageformats (5.31.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 13 Feb 2017 14:37:26 +0000
+
+kimageformats (5.30.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 16 Jan 2017 13:40:51 +0000
+
+kimageformats (5.29.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 09 Dec 2016 19:07:57 +0000
+
+kimageformats (5.28.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+  [ Maximiliano Curia ]
+  * New upstream release (5.28)
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 18 Nov 2016 16:04:10 +0100
+
+kimageformats (5.28.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Thu, 17 Nov 2016 09:45:50 +0000
+
+kimageformats (5.27.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+  [ Maximiliano Curia ]
+  * New upstream release (5.27)
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 15 Oct 2016 17:00:03 +0200
+
+kimageformats (5.27.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sat, 08 Oct 2016 11:31:06 +0000
+
+kimageformats (5.26.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+  [ Maximiliano Curia ]
+  * Replace dbus-launch with dbus-run-session in tests
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 29 Sep 2016 11:59:06 +0200
+
+kimageformats (5.26.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 12 Sep 2016 08:32:17 +0000
+
+kimageformats (5.25.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 19 Aug 2016 09:09:56 +0200
+
+kimageformats (5.25.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Sat, 13 Aug 2016 20:15:55 +0000
+
+kimageformats (5.24.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 11 Jul 2016 07:42:11 +0000
+
+kimageformats (5.23.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 18 Jun 2016 16:50:10 +0200
+
+kimageformats (5.23.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 13 Jun 2016 09:39:24 +0000
+
+kimageformats (5.22.0-3) unstable; urgency=medium
+
+  * Team upload.
+  * Remove unused libjpeg-dev and libopenjpeg-dev build dependencies.
+    (Closes: #826818)
+  * Stop forcing the local installation to debian/tmp, letting the package
+    directory as install place.
+    - remove kimageformat-plugins.install, no more used now
+  * Shorten the short description.
+  * Update copyright.
+
+ -- Pino Toscano <pino@debian.org>  Thu, 09 Jun 2016 11:16:16 +0200
+
+kimageformats (5.22.0-2) unstable; urgency=medium
+
+  * Follow jasper archive removal (Closes: 818206)
+  * Add optional build dependency
+
+ -- Maximiliano Curia <maxy@debian.org>  Tue, 24 May 2016 13:44:07 +0200
+
+kimageformats (5.22.0-1) unstable; urgency=medium
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 19 May 2016 00:16:52 +0200
+
+kimageformats (5.22.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Tue, 17 May 2016 07:35:40 +0000
+
+kimageformats (5.21.0-1) experimental; urgency=medium
+
+  [ Maximiliano Curia ]
+  * Replace the "Historical name" ddeb-migration by its "Modern, clearer"
+    replacement dbgsym-migration.
+  * Add upstream metadata (DEP-12)
+  * debian/control: Update Vcs-Browser and Vcs-Git fields
+  * uscan no longer supports more than one main upstream tarball being listed
+  * Drop Xephyr hack
+
+  [ Automatic packaging ]
+  * Update build-deps and deps with the info from cmake
+  * Bump Standards-Version to 3.9.8
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 05 May 2016 15:11:55 +0200
+
+kimageformats (5.21.0-0neon) xenial; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Mon, 11 Apr 2016 09:23:42 +0000
+
+kimageformats (5.20.0-0neon) wily; urgency=medium
+
+  * New release
+
+ -- Neon CI <neon@kde.org>  Fri, 01 Apr 2016 11:06:31 +0000
+
+kimageformats (5.19.0-1) experimental; urgency=medium
+
+  * New upstream release (5.19.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 13 Feb 2016 15:15:50 +0100
+
+kimageformats (5.18.0-1) experimental; urgency=medium
+
+  * New upstream release (5.17.0).
+  * New upstream release (5.18.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Wed, 27 Jan 2016 13:33:21 +0100
+
+kimageformats (5.16.0-1) unstable; urgency=medium
+
+  * New upstream release (5.16.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Mon, 30 Nov 2015 12:12:26 +0100
+
+kimageformats (5.15.0-1) unstable; urgency=medium
+
+  * New upstream release (5.15.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 09 Oct 2015 19:15:52 +0200
+
+kimageformats (5.15.0-0ubuntu1) wily; urgency=medium
+
+  [ Scarlett Clark ]
+  * Vivid backport
+
+  [ Jonathan Riddell ]
+  * new upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 07 Oct 2015 13:50:15 +0100
+
+kimageformats (5.14.0-1) unstable; urgency=medium
+
+  * New upstream release (5.14.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Tue, 15 Sep 2015 13:47:43 +0200
+
+kimageformats (5.14.0-0ubuntu1) wily; urgency=medium
+
+  * new upstream release
+
+ -- Clive Johnston <clivejo@aol.com>  Thu, 17 Sep 2015 13:20:05 +0100
+
+kimageformats (5.13.0-1) unstable; urgency=medium
+
+  * New upstream release (5.13.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 27 Aug 2015 18:35:56 +0200
+
+kimageformats (5.13.0-0ubuntu1) wily; urgency=medium
+
+  * new upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 10 Aug 2015 13:12:25 +0200
+
+kimageformats (5.12.0-1) unstable; urgency=medium
+
+  * New upstream release (5.12.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 09 Jul 2015 12:42:51 +0200
+
+kimageformats (5.12.0-0ubuntu1) wily; urgency=medium
+
+  * New upstream release
+  * Vivid backport.
+
+ -- Scarlett Clark <sgclark@kubuntu.org>  Mon, 03 Aug 2015 14:31:37 +0200
+
+kimageformats (5.11.0-1) unstable; urgency=medium
+
+  * New upstream release (5.10.0).
+  * New upstream release (5.11.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 26 Jun 2015 15:52:45 +0200
+
+kimageformats (5.10.0-0ubuntu1) wily; urgency=medium
+
+  [ Maximiliano Curia ]
+  * New upstream release (5.10.0).
+
+  [ Jonathan Riddell ]
+  * New upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Wed, 03 Jun 2015 20:38:48 +0200
+
+kimageformats (5.9.0-1) experimental; urgency=medium
+
+  * New upstream release (5.9.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Thu, 23 Apr 2015 08:25:07 +0200
+
+kimageformats (5.9.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Scarlett Clark <sgclark@kubuntu.org>  Mon, 13 Apr 2015 22:25:23 +0200
+
+kimageformats (5.8.0-1) experimental; urgency=medium
+
+  * New upstream release (5.8.0).
+
+ -- Maximiliano Curia <maxy@debian.org>  Sat, 14 Mar 2015 22:27:03 +0100
+
+kimageformats (5.8.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Tue, 17 Mar 2015 15:34:59 +0100
+
+kimageformats (5.7.0-1) experimental; urgency=medium
+
+  * New upstream release (5.7.0).
+  * Update copyright information.
+
+ -- Maximiliano Curia <maxy@debian.org>  Tue, 03 Mar 2015 08:39:59 +0100
+
+kimageformats (5.7.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Harald Sitter <sitter@kde.org>  Tue, 10 Feb 2015 17:01:52 +0100
+
+kimageformats (5.6.0-1) experimental; urgency=medium
+
+  * New upstream release (5.6.0).
+  * Bump build dependencies to build against the experimental versions.
+  * Bump Standards-Version to 3.9.6, no changes needed.
+  * Update install files.
+  * Update build dependencies to follow cmake.
+  * Update copyright information.
+
+ -- Maximiliano Curia <maxy@debian.org>  Fri, 23 Jan 2015 14:31:20 +0100
+
+kimageformats (5.6.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Tue, 06 Jan 2015 20:20:08 +0100
+
+kimageformats (5.5.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Scarlett Clark <sgclark@kubuntu.org>  Mon, 15 Dec 2014 12:37:23 +0100
+
+kimageformats (5.4.0-0ubuntu1) vivid; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 07 Nov 2014 15:14:07 +0100
+
+kimageformats (5.3.0-0ubuntu1) utopic; urgency=medium
+
+  * New upstream release
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Tue, 07 Oct 2014 11:26:46 +0100
+
+kimageformats (5.2.0-0ubuntu1) utopic; urgency=medium
+
+  * New upstream release
+  * Use pkg-kde-tools version 3 scripts
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Mon, 22 Sep 2014 20:04:32 +0200
+
+kimageformats (5.1.0-0ubuntu1) utopic; urgency=medium
+
+  * Update copyright to match licensing to source
+  * New upstream release
+
+ -- Scarlett Clark <scarlett@scarlettgatelyclark.com>  Tue, 05 Aug 2014 17:32:40 +0200
+
+kimageformats (5.0.0-0ubuntu1) utopic; urgency=medium
+
+  [ Jonathan Riddell ]
+  * Initial stable upstream release
+
+ -- Rohan Garg <rohangarg@kubuntu.org>  Thu, 10 Jul 2014 13:40:44 +0200
