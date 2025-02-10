@@ -1,15 +1,47 @@
-Source: template-repository
-Section: unknown
+Source: kf6-kimageformats
+Section: kde
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Aurélien COUDERC <coucouf@debian.org>,
+           Patrick Franz <deltaone@debian.org>,
+Build-Depends: debhelper-compat (= 13),
+               dh-sequence-kf6,
+               cmake (>= 3.16~),
+               extra-cmake-modules (>= 6.10.0~),
+               libavif-dev (>= 1~),
+               libheif-dev (>= 1.10.0~),
+               libheif-plugin-j2kdec <!nocheck>,
+               libheif-plugin-libde265 <!nocheck>,
+               libheif-plugin-x265 <!nocheck>,
+               libjxl-dev (>= 0.7.0~) [linux-any],
+               libjxr-dev,
+               libkf6archive-dev (>= 6.10.0~),
+               libopenexr-dev (>= 3.0~),
+               libraw-dev (>= 0.20.2~),
+               pkgconf,
+               qt6-base-dev (>= 6.6.0~),
+               qt6-image-formats-plugins <!nocheck>,
+               xauth <!nocheck>,
+               xvfb <!nocheck>,
+Standards-Version: 4.7.0
+Homepage: https://invent.kde.org/frameworks/kimageformats
+Vcs-Browser: https://salsa.debian.org/qt-kde-team/kde/kf6-kimageformats
+Vcs-Git: https://salsa.debian.org/qt-kde-team/kde/kf6-kimageformats.git
+Rules-Requires-Root: no
 
-Package: template-repository
+Package: kimageformat6-plugins
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Depends: libheif-plugin-j2kdec,
+         libheif-plugin-libde265,
+         libheif-plugin-x265,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Breaks: kf6-kimageformat-plugins,
+Replaces: kf6-kimageformat-plugins,
+Description: additional image format plugins for Qt Gui
+ This framework provides additional image format plugins for QtGui.  As
+ such it is not required for the compilation of any other software, but
+ may be a runtime requirement for Qt-based software to support certain
+ image formats.
+ .
+ This package is part of KDE Frameworks 6.

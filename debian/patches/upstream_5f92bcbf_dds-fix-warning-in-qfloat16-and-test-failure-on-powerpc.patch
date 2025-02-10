@@ -1,0 +1,203 @@
+From 5f92bcbf26a63a5179b1c87186d72dcd4bb904f7 Mon Sep 17 00:00:00 2001
+From: Mirco Miranda <mircomir@gmail.com>
+Date: Wed, 15 Jan 2025 17:45:57 +0000
+Subject: [PATCH] DDS: Fix warning in qfloat16 and test failure on PowerPC
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Fixes the following warning:
+```
+/home/daniel/kimageformats/src/imageformats/dds.cpp: In function ‘qfloat16 readFloat16(QDataStream&)’:
+/home/daniel/kimageformats/src/imageformats/dds.cpp:1037:11: warning: ‘void* memcpy(void*, const void*, size_t)’ copying an object of non-trivial type ‘class qfloat16’ from an array of ‘quint16’ {aka ‘short unsigned int’} [-Wclass-memaccess]
+ 1037 |     memcpy(&f16, &rawData, sizeof(rawData));
+      |     ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/qt6/QtCore/qmetatype.h:14,
+                 from /usr/include/qt6/QtCore/qobject.h:18,
+                 from /usr/include/qt6/QtCore/qiodevice.h:10,
+                 from /usr/include/qt6/QtGui/qimageiohandler.h:9,
+                 from /usr/include/qt6/QtGui/QImageIOPlugin:1,
+                 from /home/daniel/kimageformats/src/imageformats/dds_p.h:13,
+                 from /home/daniel/kimageformats/src/imageformats/dds.cpp:12:
+/usr/include/qt6/QtCore/qfloat16.h:46:7: note: ‘class qfloat16’ declared here
+   46 | class qfloat16
+      |       ^~~~~~~~
+
+```
+
+Should also fixes the following failed tests under PowerPC (32-bits):
+```
+INFO : rgba16dx10.dds: converting rgba16dx10.dds from RGBA16FPx4 to ARGB32
+FAIL : rgba16dx10.dds: differs from rgba16dx10.png
+       expected data written to rgba16dx10.dds-expected.data
+       actual data written to rgba16dx10.dds-actual.data
+```
+```
+INFO : rgba_f16.dds: converting rgba_f16.dds from RGBA16FPx4 to ARGB32
+FAIL : rgba_f16.dds: differs from rgba_f16.png
+       expected data written to rgba_f16.dds-expected.data
+       actual data written to rgba_f16.dds-actual.data
+```
+---
+ autotests/CMakeLists.txt               |  4 +---
+ autotests/read/dds/rgba16dx10.dds.json |  7 +++++++
+ autotests/read/dds/rgba_f16.dds.json   |  7 +++++++
+ autotests/readtest.cpp                 |  7 ++++++-
+ autotests/templateimage.cpp            |  9 +++++++++
+ autotests/templateimage.h              | 14 +++++++++++++-
+ src/imageformats/dds.cpp               |  6 +-----
+ 7 files changed, 44 insertions(+), 10 deletions(-)
+ create mode 100644 autotests/read/dds/rgba16dx10.dds.json
+ create mode 100644 autotests/read/dds/rgba_f16.dds.json
+
+--- a/autotests/CMakeLists.txt
++++ b/autotests/CMakeLists.txt
+@@ -131,9 +131,7 @@
+     )
+ endif()
+ 
+-# Allow some fuzziness when reading this formats, to allow for
+-# rounding errors (eg: in alpha blending).
+-kimageformats_read_tests(FUZZ 1
++kimageformats_read_tests(
+     xcf
+ )
+ 
+--- /dev/null
++++ b/autotests/read/dds/rgba16dx10.dds.json
+@@ -0,0 +1,7 @@
++[
++    {
++        "fileName" : "rgba16dx10.png",
++        "fuzziness" : 1,
++        "description" : "Minimum fuzziness value to pass the test on all architectures."
++    }
++]
+--- /dev/null
++++ b/autotests/read/dds/rgba_f16.dds.json
+@@ -0,0 +1,7 @@
++[
++    {
++        "fileName" : "rgba_f16.png",
++        "fuzziness" : 1,
++        "description" : "Minimum fuzziness value to pass the test on all architectures."
++    }
++]
+--- a/autotests/readtest.cpp
++++ b/autotests/readtest.cpp
+@@ -362,7 +362,12 @@
+                                         << " to " << formatToString(cmpFormat) << '\n';
+                     expImage = expImage.convertToFormat(cmpFormat);
+                 }
+-                if (fuzzyeq(inputImage, expImage, fuzziness)) {
++                auto tmpFuzziness = fuzziness;
++                if (tmpFuzziness == 0) {
++                    // If the fuzziness value is not explicitly set I use the one set for the current image.
++                    tmpFuzziness = timg.fuzziness();
++                }
++                if (fuzzyeq(inputImage, expImage, tmpFuzziness)) {
+                     QTextStream(stdout) << "PASS : " << fi.fileName() << "\n";
+                     ++passed;
+                 } else {
+--- a/autotests/templateimage.cpp
++++ b/autotests/templateimage.cpp
+@@ -12,6 +12,48 @@
+ #include <QJsonObject>
+ #include <QVersionNumber>
+ 
++static QJsonObject searchObject(const QFileInfo& file)
++{
++    auto fi = QFileInfo(QStringLiteral("%1.json").arg(file.filePath()));
++    if (!fi.exists()) {
++        return {};
++    }
++
++    QFile f(fi.filePath());
++    if (!f.open(QFile::ReadOnly)) {
++        return {};
++    }
++
++    QJsonParseError err;
++    auto doc = QJsonDocument::fromJson(f.readAll(), &err);
++    if (err.error != QJsonParseError::NoError || !doc.isArray()) {
++        return {};
++    }
++
++    auto currentQt = QVersionNumber::fromString(qVersion());
++    auto arr = doc.array();
++    for (auto val : arr) {
++        if (!val.isObject())
++            continue;
++        auto obj = val.toObject();
++        auto minQt = QVersionNumber::fromString(obj.value("minQtVersion").toString());
++        auto maxQt = QVersionNumber::fromString(obj.value("maxQtVersion").toString());
++        auto name = obj.value("fileName").toString();
++        auto unsupportedFormat = obj.value("unsupportedFormat").toBool();
++
++        // filter
++        if (name.isEmpty() && !unsupportedFormat)
++            continue;
++        if (!minQt.isNull() && currentQt < minQt)
++            continue;
++        if (!maxQt.isNull() && currentQt > maxQt)
++            continue;
++        return obj;
++    }
++
++    return {};
++}
++
+ TemplateImage::TemplateImage(const QFileInfo &fi) :
+     m_fi(fi)
+ {
+@@ -46,6 +88,15 @@
+ }
+ 
+ 
++quint8 TemplateImage::fuzziness() const
++{
++    auto obj = searchObject(m_fi);
++    if (obj.isEmpty()) {
++        return quint8(0);
++    }
++    return quint8(obj.value("fuzziness").toInt());
++}
++
+ QStringList TemplateImage::suffixes()
+ {
+     return QStringList({"png", "tif", "tiff", "json"});
+--- a/autotests/templateimage.h
++++ b/autotests/templateimage.h
+@@ -61,6 +61,17 @@
+     QFileInfo compareImage(TestFlags &flags, QString& comment) const;
+ 
+     /*!
++     * \brief fuzziness
++     * The fuzziness value that ensures the test works correctly. Normally
++     * set for lossy codecs and images that require floating point
++     * conversions.
++     * Floating point conversions may give slightly different results from
++     * one architecture to another (Intel, PowerPC, Arm, etc...).
++     * \return The default fuzziness value for the image. Zero means no fuzziness.
++     */
++    quint8 fuzziness() const;
++
++    /*!
+      * \brief suffixes
+      * \return The list of suffixes considered templates.
+      */
+--- a/src/imageformats/dds.cpp
++++ b/src/imageformats/dds.cpp
+@@ -1031,11 +1031,7 @@
+ static qfloat16 readFloat16(QDataStream &s)
+ {
+     qfloat16 f16;
+-
+-    quint16 rawData;
+-    s >> rawData;
+-    memcpy(&f16, &rawData, sizeof(rawData));
+-
++    s >> f16;
+     return f16;
+ }
+ 
