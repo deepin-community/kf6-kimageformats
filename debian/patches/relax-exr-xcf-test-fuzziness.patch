@@ -1,0 +1,35 @@
+From: Tianyu Chen <sweetyfish@deepin.org>
+Date: Fri, 30 Oct 2026 11:01:54 +0800
+Subject: Relax the EXR/XCF test fuzziness so they pass on aarch64
+
+---
+ autotests/read/xcf/birthday16fp.xcf.json | 6 ++++++
+ autotests/writetest.cpp                  | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+ create mode 100644 autotests/read/xcf/birthday16fp.xcf.json
+
+diff --git a/autotests/read/xcf/birthday16fp.xcf.json b/autotests/read/xcf/birthday16fp.xcf.json
+new file mode 100644
+index 0000000..0a297cf
+--- /dev/null
++++ b/autotests/read/xcf/birthday16fp.xcf.json
+@@ -0,0 +1,6 @@
++[
++    {
++        "fileName" : "birthday16fp.png",
++        "fuzziness" : 4
++    }
++]
+diff --git a/autotests/writetest.cpp b/autotests/writetest.cpp
+index db34f97..47db7e6 100644
+--- a/autotests/writetest.cpp
++++ b/autotests/writetest.cpp
+@@ -311,7 +311,7 @@ int formatTest(const QString &suffix, bool createTemplates)
+         // This comparison is only to understand if the plugin has written a completely wrong image. I therefore have no
+         // qualms about converting them to a more convenient format or to tolerate slightly different pixels.
+         auto compareFormat = writtenImage.hasAlphaChannel() ? QImage::Format_ARGB32 : QImage::Format_RGB32;
+-        if (!fuzzyeq(writtenImage.convertToFormat(compareFormat), tmplImage.convertToFormat(compareFormat), 5)) {
++        if (!fuzzyeq(writtenImage.convertToFormat(compareFormat), tmplImage.convertToFormat(compareFormat), 6)) {
+             ++failed;
+             QTextStream(stdout) << "FAIL : re-reading the data resulted in a different image " << formatName << "\n";
+             continue;

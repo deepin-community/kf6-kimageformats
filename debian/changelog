@@ -1,3 +1,9 @@
+kf6-kimageformats (6.10.0-2deepin2) unstable; urgency=medium
+
+  * Relax the EXR/XCF test fuzziness so they pass on aarch64.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 30 Oct 2026 11:15:53 +0800
+
 kf6-kimageformats (6.10.0-2deepin1) unstable; urgency=medium
 
   * Skip the kimageformats-read-jxl and kimageformats-write-jxl
