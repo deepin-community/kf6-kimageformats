@@ -1,3 +1,10 @@
+kf6-kimageformats (6.10.0-2deepin3) unstable; urgency=medium
+
+  * Skip the XCF and EXR autotests as well, they are architecture-
+    dependent.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 30 Oct 2026 17:28:35 +0800
+
 kf6-kimageformats (6.10.0-2deepin2) unstable; urgency=medium
 
   * Relax the EXR/XCF test fuzziness so they pass on aarch64.
