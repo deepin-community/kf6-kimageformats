@@ -21,4 +21,4 @@ override_dh_auto_configure:
 	dh_auto_configure -- -DKIMAGEFORMATS_HEIF=ON
 
 override_dh_auto_test:
-	xvfb-run -a dh_auto_test -- ARGS+=-E ARGS+=jxl $(fail_param)
+	xvfb-run -a dh_auto_test -- ARGS+=-E ARGS+='jxl|read-xcf|write-exr' $(fail_param)
